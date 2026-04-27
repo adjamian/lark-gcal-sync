@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  launchd job definition for lark-gcal-sync.
+
+  HOW TO USE
+  ──────────
+  1. Copy this template to a personalized filename (matching the <Label> below):
+        cp com.example.lark-gcal-sync.plist.example com.jdoe.lark-gcal-sync.plist
+
+  2. Replace the two placeholders below:
+        __YOUR_USERNAME__   → your macOS short username (run `whoami`)
+        __PROJECT_PATH__    → absolute path to the cloned project
+                              (run `pwd` from inside the project folder)
+
+  3. Install:
+        cp com.jdoe.lark-gcal-sync.plist ~/Library/LaunchAgents/
+        launchctl load ~/Library/LaunchAgents/com.jdoe.lark-gcal-sync.plist
+
+  4. Verify (PID + last exit code will show):
+        launchctl list | grep lark-gcal-sync
+        tail -10 sync.log
+
+  TO STOP THE JOB LATER
+        launchctl unload ~/Library/LaunchAgents/com.jdoe.lark-gcal-sync.plist
+-->
+<plist version="1.0">
+<dict>
+    <!-- Unique reverse-DNS identifier. Convention: com.<your-username>.<project>.
+         The Label MUST match the .plist filename without the extension. -->
+    <key>Label</key>
+    <string>com.__YOUR_USERNAME__.lark-gcal-sync</string>
+
+    <!-- The exact command launchd runs on each fire.
+         [0] absolute path to the venv's python interpreter
+         [1] absolute path to sync.py -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>__PROJECT_PATH__/.venv/bin/python</string>
+        <string>__PROJECT_PATH__/sync.py</string>
+    </array>
+
+    <!-- Working directory for each fire. sync.py finds config.yaml, tokens/,
+         and state.db relative to its own file path, so this is belt-and-
+         suspenders — set it correctly anyway. -->
+    <key>WorkingDirectory</key>
+    <string>__PROJECT_PATH__</string>
+
+    <!-- How often sync fires, in seconds.
+         120 = every 2 minutes. Reasonable range: 60–600.
+         Below 60 you risk overlapping runs; above 600 you trade away
+         responsiveness with no real cost savings. -->
+    <key>StartInterval</key>
+    <integer>120</integer>
+
+    <!-- Fire once immediately on load so you can verify the job works
+         without waiting for the first interval. Leave this true. -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Capture stdout. In normal operation the script logs to sync.log
+         and silences stdout when not running in a terminal, so this file
+         should stay 0 bytes. -->
+    <key>StandardOutPath</key>
+    <string>__PROJECT_PATH__/launchd.out.log</string>
+
+    <!-- Capture stderr. Should stay 0 bytes in normal operation. If it
+         grows, something is raising exceptions or printing warnings. -->
+    <key>StandardErrorPath</key>
+    <string>__PROJECT_PATH__/launchd.err.log</string>
+</dict>
+</plist>

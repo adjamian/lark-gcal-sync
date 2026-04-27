@@ -1,0 +1,27 @@
+# Copy this file to config.yaml and fill in real values.
+# config.yaml is gitignored.
+
+lark:
+  # "feishu.cn" for China region (api host: open.feishu.cn)
+  # "larksuite.com" for international Lark (api host: open.larksuite.com)
+  domain: feishu.cn
+  app_id: "cli_xxxxxxxxxxxx"
+  app_secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+google:
+  # Dedicated mirror calendar, NOT your primary calendar.
+  calendar_id: "xxxxxxxx@group.calendar.google.com"
+  # OAuth client JSON downloaded from Google Cloud Console.
+  credentials_path: "tokens/credentials.json"
+  # Where the refresh token is cached after first-run OAuth.
+  token_path: "tokens/google_token.json"
+
+sync:
+  window_past_days: 7
+  window_future_days: 180
+  title_prefix: "[Lark] "
+  private_title: "[Lark] Busy"
+
+paths:
+  state_db: "state.db"
+  log_file: "sync.log"

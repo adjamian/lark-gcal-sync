@@ -1,0 +1,31 @@
+# Secrets & real config — never commit
+config.yaml
+.env
+.env.local
+tokens/
+
+# Each user's personalized launchd plist (paths + label encode their machine).
+# The committed template is com.example.lark-gcal-sync.plist.example.
+*.plist
+!*.plist.example
+
+# Local state & logs
+state.db
+*.log
+*.log.*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
