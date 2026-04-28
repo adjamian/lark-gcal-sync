@@ -122,6 +122,14 @@ In your platform's developer console:
    only (specific members, not whole org). Scope changes do not take effect
    until a version is released.
 
+   > **May require admin approval**: many Lark/Feishu organizations gate
+   > custom-app releases behind a workspace administrator. If your
+   > submission shows "Pending review" (or stays in an unreleased state),
+   > contact your IT / Lark / Feishu admin and ask them to approve the app.
+   > Wait time varies — minutes to days depending on the org. The rest of
+   > setup (Google side, code) can proceed in parallel; the sync simply
+   > won't work end-to-end until the app is released.
+
 ### 3. Create a Google Cloud project for OAuth
 
 1. Open https://console.cloud.google.com/ and create a project (any name).
