@@ -6,7 +6,7 @@ on a configurable schedule via macOS `launchd`. The mirror is one-directional:
 edits made directly in Google get overwritten on the next sync.
 
 ## Who is this for?
-This tool is for individuals who use Lark internally and Google Calendar externally, want their booking pages to reflect Lark unavailability, and are comfortable running a Python service on their MacBook.
+This tool is for individuals who use Lark internally and Google Calendar externally, and want their Google booking pages to reflect Lark unavailability, and are comfortable running a Python service on their MacBook.
 
 ## Background
 
