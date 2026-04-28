@@ -131,6 +131,14 @@ disappear from Lark.
 Open the new calendar's *Settings and sharing* → *Integrate calendar* and
 copy the **Calendar ID** (looks like `xxxxxxxx@group.calendar.google.com`).
 
+> **Heads-up on visibility in Lark or Feishu**: If you have your Google
+> account connected inside Lark/Feishu (so it shows your Google calendars in
+> its sidebar), the new "Lark Mirror" calendar will appear there too. After
+> the first sync, **uncheck "Lark Mirror" in your Lark/Feishu sidebar** —
+> otherwise every event will show twice in your Lark/Feishu UI (once
+> natively, once round-tripped through Google). In Google Calendar, leave
+> it checked: that's where you want to see the mirrored events.
+
 ### 5. Configure
 
 ```sh
