@@ -2,15 +2,15 @@
 
 One-way calendar sync from **Lark / Feishu Calendar** to **Google Calendar**.
 
-##Background
+## Background
 
 Lark and Google Calendar both serve as calendar systems in environments where teams use Lark for internal collaboration but Google Calendar for external scheduling and booking links. Without a sync between them, a booking page offered to external parties has no visibility into internal Lark commitments or personal calendars, so external bookers can schedule over meetings the user already has. The user is forced to either manually block time in Google to mirror their Lark and personal commitments, or accept that booked meetings will conflict. Lark's CalDAV endpoint is read-only and not consumable by Google, Lark does not publish ICS feeds, and Lark's native Google integration runs in the opposite direction (Google into Lark, primary calendar only).
 
-##What this tool does, in plain terms
+## What this tool does, in plain terms
 
 It copies your Lark events into a separate Google calendar every 10 minutes so your Google booking page knows when you are actually busy. Your colleagues at Lark do not see anything change. External people booking time with you stop scheduling on top of your Lark meetings. Event details stay private if you mark them private, showing only as "Busy" with no description. Runs on your MacBook in the background. You set it up once and forget it.
 
-##hat this tool does, technically
+## What this tool does, technically
 
 A Python service that polls the Lark Open Platform calendar API every 10 minutes via launchd, reads events from the user's primary Lark calendar across a rolling window of (now minus 7 days) to (now plus 90 days), and reconciles them against a dedicated mirror calendar in the user's Google Workspace account using the Google Calendar API. State is persisted in a local SQLite database mapping Lark event IDs to Google event IDs with last-modified timestamps, enabling correct propagation of creates, updates, and deletes. Mirrored events are title-prefixed for visual clarity, attendees are serialized as plain text in the description field rather than as Google attendees (preventing spurious invitations to Lark internal users), and Lark events with private visibility are mirrored as "Busy" with start and end times only. OAuth tokens for both platforms are stored locally and gitignored. No server infrastructure required; each user runs their own isolated deployment with their own credentials. One-way Lark to Google only.
 
